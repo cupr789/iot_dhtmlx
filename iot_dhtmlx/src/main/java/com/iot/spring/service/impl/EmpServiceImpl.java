@@ -28,7 +28,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public int insertEmp(Map<String, String> map) {
+	public int insertEmp(Map<String, Object> map) {
 
 		return edao.insertEmp(map);
 	}

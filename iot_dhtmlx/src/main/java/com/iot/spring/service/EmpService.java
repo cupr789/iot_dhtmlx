@@ -8,7 +8,7 @@ import com.iot.spring.vo.Emp;
 public interface EmpService {
 	public List<Emp> getEmpList();
 	public Emp getEmp(String EmpName);
-	public int insertEmp(Map<String, String> map);
+	public int insertEmp(Map<String, Object> map);
 	public int updateEmp();
 	public int deleteEmp();
 }

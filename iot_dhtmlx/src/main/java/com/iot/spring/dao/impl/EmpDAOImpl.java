@@ -32,8 +32,9 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public int insertEmp(Map<String, String> map) {
+	public int insertEmp(Map<String, Object> map) {
 		SqlSession ss = ssf.openSession();
+		System.out.println("들어옴?");
 		int insert = ss.insert("emp.insertEmp",map);
 		ss.close();
 		return insert;

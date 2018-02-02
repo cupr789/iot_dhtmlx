@@ -1,6 +1,7 @@
 package com.iot.spring.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +63,14 @@ public class EmpContoller {
 			return "error/error";
 		}
 		logger.info("insert result=> {}",empDTO);
+		logger.info("insert name=> {}",empDTO.getEmpName());
+		logger.info("insert sal=> {}",empDTO.getEmpSal());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("empName", empDTO.getEmpName());
+		map.put("empSal", empDTO.getEmpSal());
+		
+		this.es.insertEmp(map);
+		
 		return "emp/write";
 	}
 	
