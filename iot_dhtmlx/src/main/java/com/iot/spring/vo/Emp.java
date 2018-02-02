@@ -1,4 +1,4 @@
-package com.iot.spring;
+package com.iot.spring.vo;
 
 public class Emp {
 	private int empNo;

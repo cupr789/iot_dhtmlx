@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${title}</title>
+<title>Insert title here</title>
 </head>
 <body>
-<a href="${root}/emp/list">사원조회</a>
+<h2>Error List</h2>
+<c:forEach items="${errorMsg}" var="oe">
+	${oe}<br>
+</c:forEach>
 </body>
 </html>
