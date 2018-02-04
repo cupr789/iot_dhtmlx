@@ -2,6 +2,7 @@ package com.iot.spring.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iot.spring.service.EmpService;
+import com.iot.spring.vo.CheckNum;
 import com.iot.spring.vo.Emp;
 
 @Controller
@@ -85,6 +88,18 @@ public class EmpContoller {
 		list.add(es.getEmp(empName));
 		m.addAttribute("empOne",list);
 		logger.info("empOne => {}", es.getEmp(empName));
+		return "emp/one";
+	}
+	
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public String deleteEmp(@RequestParam CheckNum checkNum,Model m) {
+		//int result = es.insertEmp();
+		logger.info("deleteMap=> {}",checkNum);
+/*		Map<String,Integer> deleteMap = new HashMap<String, Integer>();
+		deleteMap.put("checkList", checkList);
+		es.deleteEmp(deleteMap);*/
+		
+
 		return "emp/one";
 	}
 	

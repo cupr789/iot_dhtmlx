@@ -34,7 +34,6 @@ public class EmpDAOImpl implements EmpDAO {
 	@Override
 	public int insertEmp(Map<String, Object> map) {
 		SqlSession ss = ssf.openSession();
-		System.out.println("들어옴?");
 		int insert = ss.insert("emp.insertEmp",map);
 		ss.close();
 		return insert;
@@ -47,9 +46,11 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public int deleteEmp() {
-
-		return 0;
+	public int deleteEmp(Map map) {
+		SqlSession ss = ssf.openSession();
+		int delete = ss.delete("emp.deleteEmp",map);
+		ss.close();
+		return delete;
 	}
 
 }

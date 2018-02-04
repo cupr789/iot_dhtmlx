@@ -3,6 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%
+String uri = request.getRequestURI();
+int idx = uri.lastIndexOf(".");
+
+if(idx!=-1){
+	uri = uri.substring(8,idx);
+}
+out.println(uri);
+%>
+
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="ver" value="?version=1.0.0"/>
 <c:set var="rPath" value="${root}/resources"/>
@@ -12,6 +22,12 @@
 <script src="${rPath}/ui/js/bootstrap.min.js${ver}"></script>
 <link rel="stylesheet" type="text/css" href="${rPath}/ui/css/bootstrap.min.css${ver}"/>
 <link rel="stylesheet" type="text/css" href="${rPath}/ui/css/bootstrap-theme.min.css${ver}"/>
+<script>
+$(document).ready(function(){
+	$("li a[href='<%=uri%>']").parent().attr("class","active");
+})
+</script>
+
 
 <nav class="navbar navbar-default" role="navigation">
 	  <div class="container-fluid">
@@ -23,15 +39,17 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#">Brand</a>
+	      <a class="navbar-brand" href="${root}/emp/list">Home</a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="navbar-collapse collapse" id="navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-		<li><a href="">Home <span class="sr-only">(current)</span></a></li>
 		<li><a href=""></a></li>
-		<li><a href="view/user/list">USER LIST</a></li>
+		<li><a href="${root}/emp/list">EMP LIST</a></li>
+		<li><a href="${pPath}/emp/write">EMP Insert</a></li>
+		<li><a href="${root}/emp/delete">EMP Delete</a></li>
+		<li><a href="${root}/emp/list">EMP Update</a></li>
 		<li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
 		  <ul class="dropdown-menu" role="menu">
@@ -45,24 +63,14 @@
 		  </ul>
 		</li>
 	      </ul>
-	      <form class="navbar-form navbar-left" role="search">
+	      <form action="${root}/emp/view" class="navbar-form navbar-left" role="search">
 		<div class="form-group">
-		  <input type="text" class="form-control" placeholder="Search">
+		  <input type="text" name="param" class="form-control" placeholder="이름으로 검색">
 		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
+		<button type="submit" class="btn btn-default">Search</button>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
-		<li><a href="#">Link</a></li>
-		<li class="dropdown">
-		  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-		  <ul class="dropdown-menu" role="menu">
-		    <li><a href="#">Action</a></li>
-		    <li><a href="#">Another action</a></li>
-		    <li><a href="#">Something else here</a></li>
-		    <li class="divider"></li>
-		    <li><a href="#">Separated link</a></li>
-		  </ul>
-		</li>
+		
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->

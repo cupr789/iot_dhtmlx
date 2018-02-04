@@ -19,5 +19,10 @@
   	insert into emp(empName,empSal) values(#{empName},#{empSal});
   </insert>
   
-  
+  <delete id="deleteEmp" parameterType="list">
+  	delete from emp where empNo in 
+  	<foreach item="item" index="index" collection="deleteNoList" open="(" separator="," close=")">  	
+  		#{item}
+  	</foreach>
+  </delete>
   </mapper>

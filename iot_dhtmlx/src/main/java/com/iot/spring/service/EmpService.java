@@ -10,5 +10,5 @@ public interface EmpService {
 	public Emp getEmp(String EmpName);
 	public int insertEmp(Map<String, Object> map);
 	public int updateEmp();
-	public int deleteEmp();
+	public int deleteEmp(Map map);
 }
