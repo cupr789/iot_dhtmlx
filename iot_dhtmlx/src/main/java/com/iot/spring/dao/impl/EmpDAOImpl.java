@@ -46,9 +46,9 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public int deleteEmp(Map map) {
+	public int deleteEmp(List<Integer> list) {
 		SqlSession ss = ssf.openSession();
-		int delete = ss.delete("emp.deleteEmp",map);
+		int delete = ss.delete("emp.deleteEmp",list);
 		ss.close();
 		return delete;
 	}

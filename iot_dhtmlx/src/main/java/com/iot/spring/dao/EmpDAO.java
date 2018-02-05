@@ -10,5 +10,5 @@ public interface EmpDAO {
 	public Emp selectEmp(String empName);
 	public int insertEmp(Map<String, Object> map);
 	public int updateEmp();
-	public int deleteEmp(Map map);
+	public int deleteEmp(List<Integer> list);
 }

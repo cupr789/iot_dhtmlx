@@ -40,9 +40,9 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public int deleteEmp(Map map) {
+	public int deleteEmp(List<Integer> list) {
 
-		return edao.deleteEmp(map);
+		return edao.deleteEmp(list);
 	}
 
 }

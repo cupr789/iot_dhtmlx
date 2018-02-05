@@ -6,13 +6,21 @@
 <%
 String uri = request.getRequestURI();
 int idx = uri.lastIndexOf(".");
-
 if(idx!=-1){
 	uri = uri.substring(8,idx);
-}
-out.println(uri);
+	if(uri.indexOf("write")!=-1){
+		uri = "/path"+uri;
+	}
+	if(uri.indexOf("/views")!=-1){
+		uri = uri.replace("/views", "");
+		if(uri.indexOf("/jstl_list")!=-1){
+			uri = uri.replace("/jstl_list", "/list");
+		}
+		
+	}
+} 
 %>
-
+<%-- <jsp:include page="/WEB-INF/views/common/header.jspf" flush="false" /> --%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="ver" value="?version=1.0.0"/>
 <c:set var="rPath" value="${root}/resources"/>
@@ -48,8 +56,8 @@ $(document).ready(function(){
 		<li><a href=""></a></li>
 		<li><a href="${root}/emp/list">EMP LIST</a></li>
 		<li><a href="${pPath}/emp/write">EMP Insert</a></li>
-		<li><a href="${root}/emp/delete">EMP Delete</a></li>
-		<li><a href="${root}/emp/list">EMP Update</a></li>
+		<li><a href="${root}/emp/delete?deleteEmpNo=">EMP Delete</a></li>
+		<li><a href="${root}/emp/update">EMP Update</a></li>
 		<li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
 		  <ul class="dropdown-menu" role="menu">

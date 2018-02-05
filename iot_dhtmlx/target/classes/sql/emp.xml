@@ -21,7 +21,7 @@
   
   <delete id="deleteEmp" parameterType="list">
   	delete from emp where empNo in 
-  	<foreach item="item" index="index" collection="deleteNoList" open="(" separator="," close=")">  	
+  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  	
   		#{item}
   	</foreach>
   </delete>
