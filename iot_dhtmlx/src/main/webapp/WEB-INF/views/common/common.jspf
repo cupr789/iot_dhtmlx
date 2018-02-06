@@ -28,16 +28,23 @@ if(idx!=-1){
 <script src="${rPath}/ui/js/jquery-3.2.1.js${ver}"></script>
 <script src="${rPath}/ui/js/grid-obj.js${ver}"></script>
 <script src="${rPath}/ui/js/bootstrap.min.js${ver}"></script>
+<script src="${rPath}/ui/js/common.js${ver}"></script>
+<script src="${rPath}/ui/js/bootstrap-table.js${ver}"></script>
+<script src="${rPath}/dx/dhtmlx.js${ver}"></script>
+
 <link rel="stylesheet" type="text/css" href="${rPath}/ui/css/bootstrap.min.css${ver}"/>
 <link rel="stylesheet" type="text/css" href="${rPath}/ui/css/bootstrap-theme.min.css${ver}"/>
-<script>
+<link rel="stylesheet" type="text/css" href="${rPath}/ui/css/bootstrap-table.css${ver}"/>
+<link rel="stylesheet" type="text/css" href="${rPath}/dx/dhtmlx.css${ver}"/>
+<link href='${rPath}/ui/css/square_menu_my.css' rel='stylesheet' type='text/css'>
+<%-- <script>
 $(document).ready(function(){
 	$("li a[href='<%=uri%>']").parent().attr("class","active");
 })
-</script>
+</script> --%>
 
 
-<nav class="navbar navbar-default" role="navigation">
+<%-- <nav class="navbar navbar-default" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -82,4 +89,6 @@ $(document).ready(function(){
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
-	</nav>
+	</nav> --%>
+	
+	

@@ -58,13 +58,13 @@ public class NaverTransDAOImpl implements NaverTransDAO{
 			con.setDefaultRequestProperty("Content-Type", this.contentType);
 			// post request
 			
-			String postParams = "source="+this.source+"&target="+this.target+"&text=" + text;
+			String postParams = "source="+this.source+"&target="+this.target+"&text=" + text;  // 내가받은 영어에러메시지를 한글로 바꿀꺼야
 			
-			con.setDoOutput(true);
+			con.setDoOutput(true); 
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			wr.writeBytes(postParams);
-			wr.flush();
-			wr.close();
+			wr.flush(); //번역실행
+			wr.close(); //번역되면 전화 끊고
 			int responseCode = con.getResponseCode();
 			if (responseCode == 200) { // 정상 호출
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -78,9 +78,13 @@ public class NaverTransDAOImpl implements NaverTransDAO{
 				response.append(inputLine);
 			}
 			br.close();
+			
+			
 			ObjectMapper om = new ObjectMapper();
 			NaverMsg json = om.readValue(response.toString(),NaverMsg.class);
 			return json.getMessage().getResult().getTranslatedText();
+			
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}finally {

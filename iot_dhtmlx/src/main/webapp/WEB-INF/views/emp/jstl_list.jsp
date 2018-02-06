@@ -26,10 +26,12 @@
 		</tr>
 
 	</c:forEach>
+	
 </table>
-<a href="${pPath}/emp/write"><button>사원정보추가</button></a>
-<a href="${root}/emp/delete"><button>사원정보삭제</button></a>
+<button>사원정보삭제</button>
 </form>	
+<a href="${pPath}/emp/write"><button>사원정보추가</button></a>
+
 </div>
 </body>
 </html>

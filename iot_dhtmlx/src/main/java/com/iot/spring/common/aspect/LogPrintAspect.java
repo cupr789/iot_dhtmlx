@@ -38,6 +38,9 @@ public class LogPrintAspect {
 		long startTime = System.currentTimeMillis();
 		try {
 			obj=pjp.proceed();
+			
+			
+		
 		} catch (Throwable e) {
 			log.error("@Around error=>{}",e);
 			ModelAndView mav = new ModelAndView("error/error");

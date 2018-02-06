@@ -18,12 +18,15 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iot.spring.common.aspect.LogPrintAspect;
 import com.iot.spring.service.EmpService;
+import com.iot.spring.service.UserService;
 import com.iot.spring.vo.CheckNum;
 import com.iot.spring.vo.Emp;
+import com.iot.spring.vo.User;
 
 @Controller
 @RequestMapping("/emp")
@@ -33,6 +36,8 @@ public class EmpController {
 	
 	@Autowired
 	private EmpService es;
+	@Autowired
+	private UserService us;
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String getEmpList(Model m) {
@@ -41,6 +46,18 @@ public class EmpController {
 		return "emp/jstl_list";
 	}
 	
+	
+	@RequestMapping(value="/lista",method=RequestMethod.GET)
+	public @ResponseBody Map getEmpListAjax(Model m) {
+		List<Emp> empList = es.getEmpList();
+		List<User> userList = us.getUserList();
+		logger.info("lista => {}",empList);
+		logger.info("lista => {}",userList);
+		Map<String, List> map = new HashMap<String, List>();
+		map.put("empList", empList);
+		map.put("userList", userList);
+		return map;
+	}
 	/*@RequestMapping(value="/write",method=RequestMethod.GET)
 	public String getWritePage(Model m) {
 		List<Emp> empList = es.getEmpList();
@@ -69,14 +86,14 @@ public class EmpController {
 			throw new Exception(es.getAllErrors().get(0).getDefaultMessage());
 			
 		}
-/*		logger.info("insert result=> {}",empDTO);
+		logger.info("insert result=> {}",empDTO);
 		logger.info("insert name=> {}",empDTO.getEmpName());
 		logger.info("insert sal=> {}",empDTO.getEmpSal());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("empName", empDTO.getEmpName());
 		map.put("empSal", empDTO.getEmpSal());
 		
-		this.es.insertEmp(map);*/
+		this.es.insertEmp(map);
 		m.setViewName("emp/write");
 		return m;
 	}
@@ -98,17 +115,9 @@ public class EmpController {
 	@RequestMapping(value="/delete",method=RequestMethod.GET)
 	public String deleteEmp(@RequestParam(value="deleteEmpNo") List<Integer> list,Model m) {
 		//int result = es.insertEmp();
-		if(list.size()!=0) {
 			logger.info("deleteList=> {}",list);
-			es.deleteEmp(list);
-			return "emp/jstl_list";
-		}
-		else {
-			getEmpList(m);
-			return "emp/list";
-		}
-		
-
+			logger.info("delete exe=> {}",es.deleteEmp(list));
+			return getEmpList(m);
 		
 	}
 	
