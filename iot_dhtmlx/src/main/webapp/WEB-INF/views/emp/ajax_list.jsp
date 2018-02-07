@@ -8,10 +8,12 @@
 </head>
 <script>
 	var au = new AjaxUtil("${root}/emp/lista", null, "GET", "json");
+	
 	function callback(res) {
 		$("#empTable").bootstrapTable('load',{data:res.empList});
 		$("#userTable").bootstrapTable('load',{data:res.userList});
 	}
+	
 	au.setCallbackSuccess(callback);
 	au.send();
 </script>

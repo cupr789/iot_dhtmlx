@@ -116,9 +116,17 @@ public class EmpController {
 	public String deleteEmp(@RequestParam(value="deleteEmpNo") List<Integer> list,Model m) {
 		//int result = es.insertEmp();
 			logger.info("deleteList=> {}",list);
-			logger.info("delete exe=> {}",es.deleteEmp(list));
+			/*logger.info("delete exe=> {}",es.deleteEmp(list));*/
 			return getEmpList(m);
-		
+	}
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public String updateEmp(@RequestParam("updateName") String updateName,
+			@RequestParam("updateSal") String updateSal,
+			@RequestParam("updateId") String updateId,Model m) {
+			logger.info("updateName=> {}",updateName);
+			logger.info("updateSal=> {}",updateSal);
+			logger.info("updateId=> {}",updateId);
+			return getEmpList(m);
 	}
 	
 }
