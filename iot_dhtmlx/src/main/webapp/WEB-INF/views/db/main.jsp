@@ -36,7 +36,7 @@ var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"l
 			  {type:"button",name:"saveBtn",value:"저장"},
 			  {type:"newcolumn"},
 			  {type:"button",name:"cancelBtn",value:"취소"}
-		  ]}
+		  ]} 
 	];
 
 
