@@ -6,12 +6,33 @@
   <select id="selectConnectionInfo" parameterType="con"  resultType="con">
   	select
   	ciNo,ciName,ciUrl,ciPort,ciDatabase,ciUser,ciPwd,ciEtc
-  	from connection_info
+  	from connection_info;
   </select>
 
   <insert id="insertConnectionInfo" parameterType="con">
   	insert into connection_info(ciName,ciUrl,ciPort,ciDatabase,ciUser,ciPwd,uiId,ciEtc) 
   	values(#{ciName},#{ciUrl},#{ciPort},#{ciDatabase},#{ciUser},#{ciPwd},#{uiId},#{ciEtc})
   </insert>
+	<select id="selectDatabase"  resultType="map">
+	show databases;
+  	</select>
+  	
+  	<select id="selectTable"  resultType="tvo" parameterType="string">
+  	select table_name as tableName, table_comment as tableComment,(data_length+index_length)/1024 as tableSize 
+  	from information_schema.tables
+	where table_schema=#{dbName}
+	and table_type='BASE TABLE';
+  	</select>
+  	
+  	
+  	<select id="selectColumn"  resultType="cvo" parameterType="string">
+	select column_name as columnName, column_default as columnDefault,
+	is_nullable as isNullAble,data_type as dataType,character_maximum_length as characterMaximumLength,
+	column_type as columnType,column_key as columnKey,column_comment as columnComment 
+	from information_schema.columns
+	where table_schema=database()
+	and table_name=#{tableName}
+	order by ordinal_position;
+  	</select>
 
   </mapper>

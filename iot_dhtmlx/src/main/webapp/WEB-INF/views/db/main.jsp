@@ -24,57 +24,82 @@
 <script>
 
 var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"left"},
-		  {type:"input",name:"ciName",label:"컨넥션이름",required:true},
-		  {type:"input",name:"ciUrl",label:"접속URL",required:true},
-		  {type:"input",name:"ciPort",label:"PORT번호",validate:"ValidInteger",required:true},
-		  {type:"input",name:"ciDatabase",label:"Database",required:true},
-		  {type:"input",name:"ciUser",label:"DB접속ID",required:true},
-	      {type:"password",name:"ciPwd",label:"비밀번호",required:true},
-	      {type:"password",name:"uiId",label:"사용자ID",required:true},
-	      {type:"input",name:"ciEtc",label:"기타"},
+		  {type:"input",name:"uiId",label:"사용자 ID",required:true},
+		  {type:"password",name:"uiPwd",label:"사용자 PWD",required:true},
 		  {type:"block", blockOffset: 0, list:[
-			  {type:"button",name:"saveBtn",value:"저장"},
+			  {type:"button",name:"signupBtn",value:"회원가입"},
 			  {type:"newcolumn"},
-			  {type:"button",name:"cancelBtn",value:"취소"}
-		  ]} 
+			  {type:"button",name:"loginBtn",value:"로그인"},
+			  {type:"newcolumn"},
+			  {type:"button",name:"cancelBtn",value:"초기화"}
+		  ]}
 	];
 
+var bodyLayout, aLay,bLay,cLay,dLay,dbTree;
+function callback(res){
+
+   dbTree = bLay.attachTreeView({
+       items: res.dbList
+   });
+   //dbTree.setImagePath("${rPath}/dx/skins/web/imgs/dhxtree_web/");
+   dbTree.enableDragAndDrop(true);
+}
 
 
-var bodyLayout;
-var a;
-dhtmlxEvent(window,"load",function (){
-	bodyLayout = new dhtmlXLayoutObject(document.body,"4C");
-	bodyLayout.cells("a").setWidth(300);
-	bodyLayout.cells("a").setText("Connection Info List");
-	a = bodyLayout.cells("a").attachForm(formObj,true);
-	bodyLayout.cells("b").setWidth(700);
-	bodyLayout.cells("b").setText("bbbb");
-	bodyLayout.cells("c").setWidth(700);
-	bodyLayout.cells("c").setText("cccc");
-	bodyLayout.cells("c").attachEditor("sd");
-	bodyLayout.cells("d").setWidth(700);
-	bodyLayout.cells("d").setText("dddd");
+function callbackInsertUser(res){
 	
-	a.attachEvent("onButtonClick",function(id){
-		if(id=="saveBtn"){
-			if(a.validate()){
-				a.send("${root}/connection/insert","POST",callBack);
-				bodyLayout.cells("b").appendObject("a");
-			}
-		}else if(id=="cancelBtn"){
-			a.clear();
-		}
-		
-	});
-})
+}
 
-   		function callBack(loader,res){
-   			var res=JSON.parse(res);
-   			alert(res.msg);
-   		}
+function callbackLoginUser(loader,res){
+	var res=JSON.parse(res);
+ 	alert(res.msg);
+}
+
+dhtmlxEvent(window,"load",function(){
+   bodyLayout = new dhtmlXLayoutObject(document.body,"4L");
+   aLay= bodyLayout.cells("a");
+   aLay.setWidth(300);
+   aLay.setText("Login");
+   var aForm = aLay.attachForm(formObj,true);
+   
+   bLay = bodyLayout.cells("b");
+   bLay.setWidth(300);
+   bLay.setText("DataBaseTree");
+   var bToolbar = bLay.attachToolbar();
+   bToolbar.addButton("adddb",1,"add Connector");
+   bToolbar.addButton("condb",2,"Connection");
+   bToolbar.attachEvent("onClick",function(id){
+      alert(id);
+   })
+   
+   
+   cLay = bodyLayout.cells("c");
+   cLay.setText("Insert Query");
+   dLay = bodyLayout.cells("d");
+   dLay.setText("Result Query");
+   
+/*    var au = new AjaxUtil("${root}/connection/db_list",null,"get");
+   au.setCallbackSuccess(callback);
+   au.send(); 
+    */
+   		
+    aForm.attachEvent("onButtonClick",function(id){
+				if(id=="loginBtn"){
+					
+				 	if(aForm.validate()){ 
+						alert("???");
+						aForm.send("${root}/user/login","POST",callbackLoginUser);
+					}
+				}else if(id=="cancelBtn"){
+					aForm.clear();
+				}else if(id=="signupBtn"){
+					alert("???");
+					document.location.href="dx_form";
+				}
+		});
+})
 </script>
 <body>
-	<div class="controls"></div>
+
 </body>
 </html>

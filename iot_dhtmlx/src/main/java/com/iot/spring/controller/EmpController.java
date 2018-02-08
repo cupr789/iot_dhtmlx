@@ -26,7 +26,7 @@ import com.iot.spring.service.EmpService;
 import com.iot.spring.service.UserService;
 import com.iot.spring.vo.CheckNum;
 import com.iot.spring.vo.Emp;
-import com.iot.spring.vo.User;
+import com.iot.spring.vo.UserVO;
 
 @Controller
 @RequestMapping("/emp")
@@ -50,7 +50,7 @@ public class EmpController {
 	@RequestMapping(value="/lista",method=RequestMethod.GET)
 	public @ResponseBody Map getEmpListAjax(Model m) {
 		List<Emp> empList = es.getEmpList();
-		List<User> userList = us.getUserList();
+		List<UserVO> userList = us.getUserList();
 		logger.info("lista => {}",empList);
 		logger.info("lista => {}",userList);
 		Map<String, List> map = new HashMap<String, List>();

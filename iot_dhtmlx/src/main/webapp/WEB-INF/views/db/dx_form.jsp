@@ -27,23 +27,18 @@
    			winF = new dhtmlXWindows();
    			winF.attachViewportTo("winVP");
    			popW = winF.createWindow("win1",20,30,320,300);
-   			popW.hide();
-   			popW.setText("폼태그");
+   			popW.setText("회원가입");
    			
 /*  --1--	var setting ={type:"settings",position:"label-left",labelWidth:100,inputWidth:120}; */
-   			var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"left"},
-   						  {type:"input",name:"ciName",label:"컨넥션이름",required:true},
-   						  {type:"input",name:"ciUrl",label:"접속URL",required:true},
-   						  {type:"input",name:"ciPort",label:"PORT번호",validate:"ValidInteger",required:true},
-   						  {type:"input",name:"ciDatabase",label:"Database",required:true},
-   						  {type:"input",name:"ciUser",label:"DB접속ID",required:true},
-   					      {type:"password",name:"ciPwd",label:"비밀번호",required:true},
-   					      {type:"password",name:"uiId",label:"사용자ID",required:true},
-   					      {type:"input",name:"ciEtc",label:"기타"},
+   			var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"left" },
+   						  {type:"input",name:"uiName",label:"사용자 이름",required:true},
+   						  {type:"input",name:"uiId",label:"사용자 ID",required:true},
+   						  {type:"password",name:"uiPwd",label:"사용자 PWD",required:true},
+   						  {type:"input",name:"uiEmail",label:"Email",required:true},
    						  {type:"block", blockOffset: 0, list:[
-   							  {type:"button",name:"saveBtn",value:"저장"},
+   							  {type:"button",name:"saveBtn",value:"가입완료"},
    							  {type:"newcolumn"},
-   							  {type:"button",name:"cancelBtn",value:"취소"}
+   							  {type:"button",name:"cancelBtn",value:"초기화"}
    						  ]}
    					];
    					
@@ -54,7 +49,7 @@
    			form.attachEvent("onButtonClick",function(id){
    				if(id=="saveBtn"){
    					if(form.validate()){
-   						form.send("${root}/connection/insert","POST",callBack);
+   						form.send("${root}/user/insert","POST",callBack);
    					}
    				}else if(id=="cancelBtn"){
    					form.clear();
@@ -67,6 +62,7 @@
    		function callBack(loader,res){
    			var res=JSON.parse(res);
    			alert(res.msg);
+   			document.location.href="main";
    		}
    		
    		
