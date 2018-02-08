@@ -34,7 +34,6 @@ public class ConnectionController {
 			logger.info("requestMap =>{}",map);
 			cs.insertConnectionInfo(map,ci);
 			return map;
-			
 	}
 	
 	@RequestMapping(value="/select", method=RequestMethod.POST)

@@ -68,6 +68,8 @@
    			var res=JSON.parse(res);
    			alert(res.msg);
    		}
+   		
+   		
    		function setPopW(onOff){
    			
    			if(onOff){

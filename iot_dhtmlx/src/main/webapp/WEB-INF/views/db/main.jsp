@@ -42,17 +42,37 @@ var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"l
 
 
 var bodyLayout;
-dhtmlxEvent(window,"load",function(){
-	bodyLayout = new dhtmlXLayoutObject(document.body,"3L");
+var a;
+dhtmlxEvent(window,"load",function (){
+	bodyLayout = new dhtmlXLayoutObject(document.body,"4C");
 	bodyLayout.cells("a").setWidth(300);
 	bodyLayout.cells("a").setText("Connection Info List");
+	a = bodyLayout.cells("a").attachForm(formObj,true);
 	bodyLayout.cells("b").setWidth(700);
 	bodyLayout.cells("b").setText("bbbb");
-	bodyLayout.cells("b").attachForm(formObj,true);
 	bodyLayout.cells("c").setWidth(700);
 	bodyLayout.cells("c").setText("cccc");
+	bodyLayout.cells("c").attachEditor("sd");
+	bodyLayout.cells("d").setWidth(700);
+	bodyLayout.cells("d").setText("dddd");
 	
+	a.attachEvent("onButtonClick",function(id){
+		if(id=="saveBtn"){
+			if(a.validate()){
+				a.send("${root}/connection/insert","POST",callBack);
+				bodyLayout.cells("b").appendObject("a");
+			}
+		}else if(id=="cancelBtn"){
+			a.clear();
+		}
+		
+	});
 })
+
+   		function callBack(loader,res){
+   			var res=JSON.parse(res);
+   			alert(res.msg);
+   		}
 </script>
 <body>
 	<div class="controls"></div>
