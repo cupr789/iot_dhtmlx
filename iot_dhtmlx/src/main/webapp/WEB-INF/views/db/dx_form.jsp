@@ -22,13 +22,14 @@
       }
    </style>
    <script>
-   		var winF,popW;
+   		var winF,popW1,popW2;
    		$(document).ready(function(){
    			winF = new dhtmlXWindows();
    			winF.attachViewportTo("winVP");
-   			popW = winF.createWindow("win1",20,30,320,300);
-   			popW.setText("회원가입");
-   			
+   			popW1 = winF.createWindow("win1",20,30,320,300);
+   			popW1.setText("회원가입");
+   			popW2 = winF.createWindow("win2",20,30,320,300);
+   			popW2.setText("삭제");
 /*  --1--	var setting ={type:"settings",position:"label-left",labelWidth:100,inputWidth:120}; */
    			var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"left" },
    						  {type:"input",name:"uiName",label:"사용자 이름",required:true},
@@ -42,9 +43,13 @@
    						  ]}
    					];
    					
+   					
+
+				
+   					
    			/* --1-- formObj.push(setting); */
   
-   			var form = popW.attachForm(formObj,true);
+   			var form = popW1.attachForm(formObj,true);
    			
    			form.attachEvent("onButtonClick",function(id){
    				if(id=="saveBtn"){
@@ -57,12 +62,36 @@
    				
    			});
    			
+   			var formDelObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"left" },
+				  {type:"input",name:"uiNo",label:"삭제할 번호",required:true},
+				  {type:"block", blockOffset: 0, list:[
+					  {type:"button",name:"delBtn",value:"삭제"},
+					  {type:"newcolumn"},
+					  {type:"button",name:"cancelBtn",value:"초기화"}
+				  ]}
+			];
+   			
+   			
+			var formDel = popW2.attachForm(formDelObj,true);
+   			
+			formDel.attachEvent("onButtonClick",function(id){
+   				if(id=="delBtn"){
+   					if(formDel.validate()){
+   						alert("삭제");
+   						formDel.send("${root}/user/delete","get",callBack);
+   					}
+   				}else if(id=="cancelBtn"){
+   					formDel.clear();
+   				}
+   				
+   			});
+   			
    		})
    		
    		function callBack(loader,res){
    			var res=JSON.parse(res);
    			alert(res.msg);
-   			document.location.href="main";
+   			document.location.href="dx_List";
    		}
    		
    		

@@ -11,5 +11,9 @@
   	insert into user_info(uiName,uiId,uiPwd,uiEmail) values(#{uiName},#{uiId},#{uiPwd},#{uiEmail});
   </insert>
   
+  <delete id="deleteUser" parameterType="int">
+  	delete from user_info where uiNo=${uiNo};
+  </delete>
+  
   
   </mapper>

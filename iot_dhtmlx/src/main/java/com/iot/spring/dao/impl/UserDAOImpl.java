@@ -32,4 +32,12 @@ public class UserDAOImpl implements UserDAO {
 		return 0;
 	}
 
+	@Override
+	public int deleteUser(int uiNo) {
+		SqlSession ss = ssf.openSession();
+		int result = ss.delete("user.deleteUser",uiNo);
+		ss.close();
+		return result;
+	}
+
 }

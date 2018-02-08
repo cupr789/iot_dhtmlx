@@ -1,5 +1,6 @@
 package com.iot.spring.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,5 +50,31 @@ public class UserController {
 		logger.info("login1 =>{}",map);
 		return map;
 	}
+	
+	@RequestMapping(value="/list",method=RequestMethod.GET)
+	public @ResponseBody Map getUserList(Model m) {
+		 List<UserVO> userList = us.getUserList();
+		 logger.info("login1 =>{}",userList);
+		Map<String,List> map = new HashMap<String, List>();
+		 
+		 map.put("userList", userList);
+		//m.addAttribute("userList",userList);
+		return map;
+	}
+	
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public @ResponseBody Map deleteUser(int uiNo,Model m) {
+		 int result = us.deleteUser(uiNo);
+		 logger.info("result =>{}",result);
+		
+		 Map<String,Object> map = new HashMap<String, Object>();
+		 if(result==1) {
+			 map.put("msg", "삭제완료");
+		 }
+		/* map.put("userList",);*/
+		//m.addAttribute("userList",userList);
+		return map;
+	}
+	
 	
 }
