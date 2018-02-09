@@ -8,12 +8,26 @@
   </select>
   
   <insert id="insertUser" parameterType="map">
-  	insert into user_info(uiName,uiId,uiPwd,uiEmail) values(#{uiName},#{uiId},#{uiPwd},#{uiEmail});
+  	insert into user_info(uiName,uiId,uiPwd,uiEmail,admin) values(#{uiName},#{uiId},#{uiPwd},#{uiEmail},#{admin});
   </insert>
   
   <delete id="deleteUser" parameterType="int">
   	delete from user_info where uiNo=${uiNo};
   </delete>
+  	
+  <select id="selectUserOne" parameterType="uvo" resultType="uvo">
+  	select uiNo,uiName,uiId,uiPwd,uiEmail,admin from user_info where 1=1
+  	<if test="uiId!=null">
+  		and uiId=#{uiId}
+  	</if>
+  	<if test="uiPwd!=null">
+  		and uiPwd=#{uiPwd}
+  	</if>
+  </select>
   
+    <select id="checkUser" parameterType="uvo" resultType="int">
+  		select count(1) from user_info where uiId = #{uiId}
+  </select>
   
+   
   </mapper>

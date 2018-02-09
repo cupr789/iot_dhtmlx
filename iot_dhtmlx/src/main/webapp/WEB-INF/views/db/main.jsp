@@ -23,7 +23,7 @@
 </style>
 <script>
 
-var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"left"},
+/* var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"left"},
 		  {type:"input",name:"uiId",label:"사용자 ID",required:true},
 		  {type:"password",name:"uiPwd",label:"사용자 PWD",required:true},
 		  {type:"block", blockOffset: 0, list:[
@@ -33,12 +33,12 @@ var formObj = [{type:"settings",offsetTop:12,name:"connectionInfo",lableAlign:"l
 			  {type:"newcolumn"},
 			  {type:"button",name:"cancelBtn",value:"초기화"}
 		  ]}
-	];
+	]; */
 
 var bodyLayout, aLay,bLay,cLay,dLay,dbTree;
 function callback(res){
 
-   dbTree = bLay.attachTreeView({
+   dbTree = aLay.attachTreeView({
        items: res.dbList
    });
    //dbTree.setImagePath("${rPath}/dx/skins/web/imgs/dhxtree_web/");
@@ -56,38 +56,37 @@ function callbackLoginUser(loader,res){
 }
 
 dhtmlxEvent(window,"load",function(){
-   bodyLayout = new dhtmlXLayoutObject(document.body,"4L");
-   aLay= bodyLayout.cells("a");
-   aLay.setWidth(300);
-   aLay.setText("Login");
-   var aForm = aLay.attachForm(formObj,true);
+   bodyLayout = new dhtmlXLayoutObject(document.body,"3L");
+   //aLay= bodyLayout.cells("a");
+  // aLay.setWidth(300);
+   //aLay.setText("Login");
+   //var aForm = aLay.attachForm(formObj,true);
    
-   bLay = bodyLayout.cells("b");
-   bLay.setWidth(300);
-   bLay.setText("DataBaseTree");
-   var bToolbar = bLay.attachToolbar();
-   bToolbar.addButton("adddb",1,"add Connector");
-   bToolbar.addButton("condb",2,"Connection");
-   bToolbar.attachEvent("onClick",function(id){
+   aLay = bodyLayout.cells("a");
+   aLay.setWidth(300);
+   aLay.setText("DataBaseTree");
+   var aToolbar = aLay.attachToolbar();
+   aToolbar.addButton("adddb",1,"add Connector");
+   aToolbar.addButton("condb",2,"Connection");
+   aToolbar.attachEvent("onClick",function(id){
       alert(id);
    })
    
    
+   bLay = bodyLayout.cells("b");
+   bLay.setText("Insert Query");
    cLay = bodyLayout.cells("c");
-   cLay.setText("Insert Query");
-   dLay = bodyLayout.cells("d");
-   dLay.setText("Result Query");
+   cLay.setText("Result Query");
    
-/*    var au = new AjaxUtil("${root}/connection/db_list",null,"get");
+   var au = new AjaxUtil("${root}/connection/db_list",null,"get");
    au.setCallbackSuccess(callback);
    au.send(); 
-    */
+    
    		
-    aForm.attachEvent("onButtonClick",function(id){
+/*     aForm.attachEvent("onButtonClick",function(id){
 				if(id=="loginBtn"){
 					
 				 	if(aForm.validate()){ 
-						alert("???");
 						aForm.send("${root}/user/login","POST",callbackLoginUser);
 					}
 				}else if(id=="cancelBtn"){
@@ -96,7 +95,7 @@ dhtmlxEvent(window,"load",function(){
 					alert("???");
 					document.location.href="dx_form";
 				}
-		});
+		}); */
 })
 </script>
 <body>

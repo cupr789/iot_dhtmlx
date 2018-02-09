@@ -36,6 +36,6 @@ public class UrlController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		model.addAttribute("title","IOT-SPRING-2");
-		return "index";
+		return "index1";
 	}
 }

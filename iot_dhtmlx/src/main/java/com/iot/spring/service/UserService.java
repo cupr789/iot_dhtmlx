@@ -6,7 +6,10 @@ import java.util.Map;
 import com.iot.spring.vo.UserVO;
 
 public interface UserService {
-	public List<UserVO> getUserList();
-	public int insertUser(UserVO uvo);
-	public int deleteUser(int uiNo);
+	List<UserVO> getUserList(UserVO uvo);
+	void insertUser(Map<String, Object> rMap,UserVO uvo);
+	int deleteUser(int uiNo);
+	UserVO getUserInfo(UserVO uvo);
+	int checkUser(UserVO uvo);
+	
 }

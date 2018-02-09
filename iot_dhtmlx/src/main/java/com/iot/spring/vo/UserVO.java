@@ -44,6 +44,11 @@ public class UserVO {
 	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
+	@Override
+	public String toString() {
+		return "UserVO [uiNo=" + uiNo + ", uiName=" + uiName + ", uiId=" + uiId + ", uiPwd=" + uiPwd + ", uiEmail="
+				+ uiEmail + ", admin=" + admin + "]";
+	}
 	
 	
 	

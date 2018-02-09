@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,36 +33,43 @@ public class UserController {
 	
 	ObjectMapper om=new ObjectMapper();
 
-	@RequestMapping(value="/insert",method=RequestMethod.POST)
-	public @ResponseBody Map insertUser(@RequestParam Map<String, Object> map) {
-		UserVO uvo = om.convertValue(map, UserVO.class);
-		logger.info("UserVO =>{}",uvo.getUiName());
-		int result = us.insertUser(uvo);
-		if(result==1) {
-			map.put("msg", "입력성공");
-		}
-		//us.insertUser(uvo);
+	@RequestMapping(value="/signup",method=RequestMethod.POST)
+	public @ResponseBody Map<String,Object> signUp(@Valid UserVO ui,HttpSession hs) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		us.insertUser(map, ui);
 		return map;
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public @ResponseBody Map LoginUser(@RequestParam Map<String, Object> map) {
-		logger.info("login1 =>{}",map);
+	public @ResponseBody Map<String,Object> LoginUser(@Valid UserVO ui,HttpSession hs) {
+		/*logger.info("login1 =>{}",map);
 		//us.insertUser(uvo);
 		map.put("msg", "입력성공");
-		logger.info("login1 =>{}",map);
+		logger.info("login1 =>{}",map);*/
+		logger.info("Before Login HttpSession =>{}",hs.getAttribute("user"));
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		ui = us.getUserInfo(ui);
+		map.put("loginOk", false);
+		map.put("msg", "로그인 실패");
+		if(ui!=null) {
+			hs.setAttribute("user", ui);
+			hs.setAttribute("isLogin", true);
+			map.put("msg", "로그인 성공");
+			map.put("loginOk", true);
+		}
+		
+		
+		logger.info("after Login HttpSession =>{}",map);
+		logger.info("after Login HttpSession =>{}",hs.getAttribute("user"));
+		
 		return map;
 	}
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public @ResponseBody Map getUserList(Model m) {
-		 List<UserVO> userList = us.getUserList();
-		 logger.info("login1 =>{}",userList);
-		Map<String,List> map = new HashMap<String, List>();
-		 
-		 map.put("userList", userList);
-		//m.addAttribute("userList",userList);
-		return map;
+	public @ResponseBody List<UserVO> getUList(UserVO uvo) {
+		return us.getUserList(uvo);
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.GET)

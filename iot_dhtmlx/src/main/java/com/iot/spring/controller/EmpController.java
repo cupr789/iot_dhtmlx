@@ -50,13 +50,14 @@ public class EmpController {
 	@RequestMapping(value="/lista",method=RequestMethod.GET)
 	public @ResponseBody Map getEmpListAjax(Model m) {
 		List<Emp> empList = es.getEmpList();
-		List<UserVO> userList = us.getUserList();
+		/*//List<UserVO> userList = us.getUserList();
 		logger.info("lista => {}",empList);
 		logger.info("lista => {}",userList);
 		Map<String, List> map = new HashMap<String, List>();
 		map.put("empList", empList);
-		map.put("userList", userList);
-		return map;
+		map.put("userList", userList);*/
+		/*return map;*/
+		return null;
 	}
 	/*@RequestMapping(value="/write",method=RequestMethod.GET)
 	public String getWritePage(Model m) {

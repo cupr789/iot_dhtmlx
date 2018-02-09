@@ -25,6 +25,8 @@ if(idx!=-1){
 <c:set var="ver" value="?version=1.0.0"/>
 <c:set var="rPath" value="${root}/resources"/>
 <c:set var="pPath" value="${root}/path"/>
+<c:set var="isLogin" value="${(empty sessionScope.isLogin)?false:sessionScope.isLogin}"/>
+
 <script src="${rPath}/ui/js/jquery-3.2.1.js${ver}"></script>
 <script src="${rPath}/ui/js/grid-obj.js${ver}"></script>
 <script src="${rPath}/ui/js/bootstrap.min.js${ver}"></script>
@@ -38,7 +40,10 @@ if(idx!=-1){
 <link rel="stylesheet" type="text/css" href="${rPath}/dx/fonts/font_roboto/roboto.css${ver}"/>
 <link rel="stylesheet" type="text/css" href="${rPath}/dx/dhtmlx.css${ver}"/>
 <link href='${rPath}/ui/css/square_menu_my.css' rel='stylesheet' type='text/css'>
-<%-- <script>
+
+<link rel="shortcut icon" href="${rPath}/imgs/favicon.png">
+
+	<%-- <script>
 $(document).ready(function(){
 	$("li a[href='<%=uri%>']").parent().attr("class","active");
 })
@@ -91,5 +96,4 @@ $(document).ready(function(){
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav> --%>
-	
 	

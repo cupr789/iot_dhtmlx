@@ -17,7 +17,7 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSessionFactory ssf;
 
 	@Override
-	public List<UserVO> selectUserList() {
+	public List<UserVO> selectUserList(UserVO uvo) {
 		SqlSession ss = ssf.openSession();
 		List<UserVO> userList = ss.selectList("user.selectUser");
 		ss.close();
@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
 		SqlSession ss = ssf.openSession();
 		int result = ss.insert("user.insertUser",uvo);
 		ss.close();
-		return 0;
+		return result;
 	}
 
 	@Override
@@ -37,6 +37,20 @@ public class UserDAOImpl implements UserDAO {
 		SqlSession ss = ssf.openSession();
 		int result = ss.delete("user.deleteUser",uiNo);
 		ss.close();
+		return result;
+	}
+
+	@Override
+	public UserVO selectUserInfo(UserVO uvo) {
+		final SqlSession ss = ssf.openSession();
+		UserVO rUvo = ss.selectOne("user.selectUserOne",uvo);
+		return rUvo;
+	}
+
+	@Override
+	public int checkUserInfo(UserVO uvo) {
+		final SqlSession ss = ssf.openSession();
+		int result = ss.selectOne("user.checkUser",uvo);
 		return result;
 	}
 

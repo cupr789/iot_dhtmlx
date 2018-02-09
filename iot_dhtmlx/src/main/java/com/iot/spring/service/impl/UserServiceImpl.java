@@ -15,19 +15,46 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserDAO userDao;
 	@Override
-	public List<UserVO> getUserList() {
-		// TODO Auto-generated method stub
-		return userDao.selectUserList();
+	public List<UserVO> getUserList(UserVO uvo) {
+		return userDao.selectUserList(uvo);
 	}
+	
+	private boolean isDuplUserInfo(UserVO uvo) {
+		if(userDao.checkUserInfo(uvo)==1) {
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
-	public int insertUser(UserVO uvo) {
-		// TODO Auto-generated method stub
-		return userDao.insertUser(uvo);
+	public void insertUser(Map<String, Object> rMap,UserVO uvo) {
+		rMap.put("msg", "회원가입이 실패하였습니다.");
+		rMap.put("signupOk", false);
+		if(isDuplUserInfo(uvo)) {
+			rMap.put("msg", uvo.getUiId()+"는 이미 존재하는 아이디 입니다.");
+			return;
+		}
+		int result = userDao.insertUser(uvo);
+		if(result==1) {
+			rMap.put("msg", "회원가입이 성공하였습니다.");
+			rMap.put("signupOk", true);
+		}
 	}
 	@Override
 	public int deleteUser(int uiNo) {
-		// TODO Auto-generated method stub
+		
 		return userDao.deleteUser(uiNo);
+	}
+	@Override
+	public UserVO getUserInfo(UserVO uvo) {
+	
+		return userDao.selectUserInfo(uvo);
+	}
+
+	@Override
+	public int checkUser(UserVO uvo) {
+		
+		return userDao.checkUserInfo(uvo);
 	}
 
 }
