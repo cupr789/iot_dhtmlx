@@ -67,7 +67,7 @@
       		var res = JSON.parse(res);
       		alert(res.msg);
       		if(res.loginOk){
-      			location.href="dx_List";
+      			location.href="main";
       		}
 	   }else{
 		   console.log(res);

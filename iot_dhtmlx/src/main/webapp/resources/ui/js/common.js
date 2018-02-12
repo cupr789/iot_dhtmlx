@@ -90,7 +90,7 @@ var AjaxUtil = function (url, params, type, dataType){
 			var objName = paramArr[i].split("_")[1];
 			
 			if(objType=="it"){
-				data[objName] = $("input[name=" + objName +"]").val();
+				data[objName] = $("input[name=" + objName +"]").val(); 
 			}else if(objType=="s"){
 				data[objName] = $("select[name=" + objName +"]").val();
 			}
@@ -116,7 +116,10 @@ var AjaxUtil = function (url, params, type, dataType){
 		this.callbackSuccess = callback;
 	}
 	
-	this.send = function(){
+	this.send = function(callback){
+		if(callback){
+			this.callbackSuccess = callback;
+		}
 		$.ajax({ 
 	        type     : this.type
 	    ,   url      : this.url

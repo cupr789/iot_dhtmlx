@@ -22,14 +22,16 @@ mygrid.init();
 var au = new AjaxUtil("${root}/user/list",null,"GET","json");
 function callback(res){
 	mygrid.parse({data:res},"js");
-	for(var i=0; i<res.length;i++){
+/* 	for(var i=0; i<res.length;i++){
 		mygrid.setRowId(i,"id"+(i+1));
-	}
+	} 
 	alert(mygrid.getRowData("id1").uiName);
 	alert(mygrid.getRowData("id2"));
-	alert(mygrid.getRowData("id3"));
+	alert(mygrid.getRowData("id3"));*/
 	
 	mygrid.attachEvent("onRowSelect", function(id,ind){
+		alert("?    "+id);
+		alert("?     "+ind);
 		alert(mygrid.getRowData(id).uiName);
 		window.open('${pPath}/db/dx_form');
 	});

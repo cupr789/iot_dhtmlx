@@ -22,7 +22,7 @@ if(idx!=-1){
 %>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jspf" flush="false" /> --%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-<c:set var="ver" value="?version=1.0.0"/>
+<c:set var="ver" value="?version=1.0.1"/>
 <c:set var="rPath" value="${root}/resources"/>
 <c:set var="pPath" value="${root}/path"/>
 <c:set var="isLogin" value="${(empty sessionScope.isLogin)?false:sessionScope.isLogin}"/>
