@@ -24,19 +24,34 @@
 <script>
 
 var bodyLayout, aLay,dbTree,winF,popW; 
+
+
+
 function connectionListCB(res){
    dbTree = aLay.attachTreeView({
        items: res.list
    });
+   ////////
+   
+   
+   
    dbTree.attachEvent("onDblClick",function(id){
       var level = dbTree.getLevel(id);
       if(level==2){
+    	  alert(dbTree.getItemText(id));
          var text = dbTree.getItemText(id);
          var au = new AjaxUtil("${root}/connection/tables/" + text + "/" + id,null,"get");
          au.send(tableListCB); 
       }
    });
+   
+   
+   
 }
+
+
+
+
 function tableListCB(res){
    var parentId = res.parentId;
    var i=1;
@@ -51,9 +66,19 @@ function tableListCB(res){
    }
    dbTree.openItem(parentId);
 }
+
+
+
+
+
 function addConnectionCB(res){
    console.log(res);
 }
+
+
+
+
+
 function dbListCB(res){
    console.log(res);
    if(res.error){
@@ -68,6 +93,12 @@ function dbListCB(res){
    }
    dbTree.openItem(parentId);
 }
+
+
+
+
+
+
 dhtmlxEvent(window,"load",function(){
 
    bodyLayout = new dhtmlXLayoutObject(document.body,"3L");
@@ -77,6 +108,8 @@ dhtmlxEvent(window,"load",function(){
    var aToolbar = aLay.attachToolbar();
    aToolbar.addButton("addcon",1,"add Connector");
    aToolbar.addButton("condb",2,"Connection");
+   
+   
    aToolbar.attachEvent("onClick",function(id){
       if(id=="condb"){
          var rowId =dbTree.getSelectedId();
@@ -90,6 +123,8 @@ dhtmlxEvent(window,"load",function(){
          popW.show();
       }
    })
+   
+   
    var au = new AjaxUtil("${root}/connection/list",null,"get");
    au.send(connectionListCB); 
 
